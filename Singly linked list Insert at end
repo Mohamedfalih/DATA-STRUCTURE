@@ -1,0 +1,70 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct Node
+{
+	int  data;
+	struct Node *next;
+};
+void insertend(struct Node**head,int data)
+{
+	struct Node *temp=*head;
+	struct Node *newnode=(struct Node*)malloc(sizeof(struct Node));
+	newnode->next=NULL;
+	newnode->data=data;
+	while(temp->next!=NULL)
+	{
+		temp=temp->next;
+	}
+
+	temp->next=newnode;
+}
+void display(struct Node *n)
+{
+
+	printf("Before Inserting: ");
+	while ( n != NULL)
+	{
+		printf ("%d ", n->data);
+		n = n->next;
+	}
+	printf ("\n");
+}
+void main()
+{	int num,in;
+	struct Node *n;
+	printf("Enter number of nodes: ");
+	scanf("%d",&num);
+	struct Node *head =(struct Node*)malloc(sizeof(struct Node));
+	printf("\nEnter data: ");
+	scanf("%d",&head->data);
+	head->next=NULL;
+	struct Node *tail = head;
+
+	for(int i=1; i<num; i++)
+	{
+		n=(struct Node*)malloc(sizeof(struct Node));
+		scanf("%d",&n->data);
+		n->next=NULL;
+		tail->next=n;
+		tail=tail->next;
+
+	}
+	display(head);
+	printf("\nEnter the element to be inserted: ");
+	scanf("%d",&in);
+	insertend(&head,in);
+	printf("\nAfter inserting: ");
+	display(head);
+}
+
+
+OUTPUT:
+
+Enter number of nodes: 5
+
+Enter data: 10 20 30 40 50
+Before Inserting: 10 20 30 40 50 
+
+Enter the element to be inserted: 60
+
+After inserting: Before Inserting: 10 20 30 40 50 60 
