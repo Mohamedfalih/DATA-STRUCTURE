@@ -1,0 +1,55 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct Node
+{
+	int  data;
+	struct Node *next;
+};
+void display(struct Node *n)
+{
+
+
+	while ( n != NULL)
+	{
+		printf ("%d ", n->data);
+		n = n->next;
+	}
+	printf ("\n");
+}
+void main ()
+{	int num ;
+	
+	struct Node *n;
+	printf("Enter number of nodes: ");
+	scanf("%d",&num);
+	struct Node *head =(struct Node*)malloc(sizeof(struct Node));
+	printf("\nEnter data: \n");
+	scanf("%d",&head->data);
+	head->next=NULL;
+	struct Node *tail = head;
+
+	for(int i=1; i<num; i++)
+	{
+		n=(struct Node*)malloc(sizeof(struct Node));
+		scanf("%d",&n->data);
+		n->next=NULL;
+		tail->next=n;
+		tail=tail->next;
+
+	}
+
+	display(head);
+}
+
+
+OUTPUT:
+     [?2004l
+Enter number of nodes: 5
+
+Enter data: 
+10
+20
+30
+40
+50
+10 20 30 40 50 
