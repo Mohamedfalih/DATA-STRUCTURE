@@ -1,0 +1,77 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct Node
+{
+        int  data;
+        struct Node *next;
+};
+void insertmiddle(struct Node**head,int pos,int  data)
+{
+        struct Node *old,*p;
+        struct Node *newnode=(struct Node*)malloc(sizeof(struct Node));
+        newnode->next=NULL;
+        newnode->data=data;
+
+    old=p=*head;
+for(int i=1;i<pos;i++)
+{
+    old=p;
+    p=p->next;
+}
+   old->next=newnode;
+   newnode->next=p;
+}
+void display(struct Node *n)
+{
+
+        printf("Before Inserting: ");
+        while ( n != NULL)
+        {
+                printf ("%d ", n->data);
+                n = n->next;
+        }
+        printf ("\n");
+}
+void main()
+{        int num,ele,pos;
+        struct Node *n;
+        printf("Enter number of nodes: ");
+        scanf("%d",&num);
+        struct Node *head =(struct Node*)malloc(sizeof(struct Node));
+        printf("\nEnter data: ");
+        scanf("%d",&head->data);
+        head->next=NULL;
+        struct Node *tail = head;
+
+        for(int i=1; i<num; i++)
+        {
+                n=(struct Node*)malloc(sizeof(struct Node));
+                scanf("%d",&n->data);
+                n->next=NULL;
+                tail->next=n;
+                tail=tail->next;
+
+        }
+        display(head);
+        printf("\nEnter the position & element to be inserted: ");
+        scanf("%d %d",&pos,&ele);
+        insertmiddle(&head,pos,ele);
+        printf("\nAfter inserting: ");
+        display(head);
+
+
+}
+
+
+
+
+OUTPUT:
+Enter number of nodes: 5
+
+Enter data: 1 2 3 5  7 
+Before Inserting: 1 2 3 5 7 
+
+Enter the position & element to be inserted:4 
+
+
+After inserting: Before Inserting: 1 2 3 4 5  7 
