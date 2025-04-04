@@ -45,6 +45,7 @@ void main ()
 		tail=tail->next;
 
 	}
+printf("Before Inserting: ");
 	display(head);
 	printf("\nEnter the element to be inserted: ");
 	scanf("%d",&in);
