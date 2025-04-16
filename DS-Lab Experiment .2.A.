@@ -1,0 +1,236 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct Node
+{
+	int  data;
+	struct Node *next;
+};
+
+void insert_begin();
+void insert_middle();
+void insert_end();
+void delete_begin();
+void delete_middle();
+void delete_end();
+void sum_of_element();
+void display();
+
+
+
+void main ()
+{	
+    int num;
+	struct Node *n;
+	printf("Enter number of nodes: ");
+	scanf("%d",&num);
+	struct Node *head =(struct Node*)malloc(sizeof(struct Node));
+	printf("\nEnter data:  ");
+	scanf("%d",&head->data);
+	head->next=NULL;
+	struct Node *tail = head;
+    
+	for(int i=1; i<num; i++)
+	{
+	    
+		n=(struct Node*)malloc(sizeof(struct Node));
+		scanf("%d",&n->data);
+		n->next=NULL;
+		tail->next=n;
+		tail=tail->next;
+
+	}
+    int choice;
+    printf("1.insert_begin\n2.insert_middle\n3.insert_end\n4.delete_begin\n5.delete_middle\n6.delete_end\n7.sum_of_element\n8.display");
+    while(1)
+    {
+        printf("\nchoice: ");
+        scanf("%d",&choice);
+        int in;
+        switch(choice)
+        {
+            case 1:
+                printf("Element to be insert : ");
+                scanf("%d",&in);
+                insert_begin(&head,in);
+                break;
+                
+            case 2:
+                printf("Element to be insert : ");
+                scanf("%d",&in);
+                insert_middle(&head,in);
+                break;
+                
+            case 3:
+                printf("Element to be insert : ");
+                scanf("%d",&in);
+                insert_end(&head,in);
+                break;
+                
+            case 4:delete_begin(&head);
+                break;
+            
+            case 5:delete_middle(&head);
+                break;
+            
+            case 6:delete_end(&head);
+                break;
+            
+            case 7:sum_of_element(head);
+                break;
+            
+            case 8:display(head);
+                break;
+                
+            default: printf("Program Terminated!!!\n");
+			    exit(0);
+                
+        }
+    }
+    
+}
+
+
+
+void insert_begin(struct Node**head,int data)
+{
+    struct Node *newnode=(struct Node*)malloc(sizeof(struct Node));
+    newnode->data=data;
+    newnode->next=*head;
+    *head=newnode;
+    
+}
+
+void insert_middle(struct Node**head,int pos,int  data)
+{
+        struct Node *old,*p;
+        struct Node *newnode=(struct Node*)malloc(sizeof(struct Node));
+        newnode->next=NULL;
+        newnode->data=data;
+
+    old=p=*head;
+for(int i=1;i<pos;i++)
+{
+    old=p;
+    p=p->next;
+}
+   old->next=newnode;
+   newnode->next=p;
+}
+
+void insert_end(struct Node**head,int data)
+{
+	struct Node *temp=*head;
+	struct Node *newnode=(struct Node*)malloc(sizeof(struct Node));
+	newnode->next=NULL;
+	newnode->data=data;
+	while(temp->next!=NULL)
+	{
+		temp=temp->next;
+	}
+
+	temp->next=newnode;
+}
+
+void delete_begin(struct Node**head)
+{
+	if (*head == NULL)
+	{
+		printf("List is already empty.\n");
+		return;
+	}
+		
+			struct Node *p;
+			p=*head;
+			*head=p->next;
+			free(p);
+}
+
+void delete_middle(struct Node **head)
+{
+        int pos;
+        struct Node *old,*p,*s;
+        printf("Enter the position to be Deleted: ");
+        scanf("%d",&pos);
+        old=*head;
+        p=*head;
+        for(int i=1; i<pos; i++)
+        {
+                old=p;
+                p=p->next;
+        }
+        s=p->next;
+        old->next=s;
+        free(p);
+}
+
+void delete_end(struct Node **head)
+{
+        struct Node *old,*p;
+        old=*head;
+        p=*head;
+        while(p->next!=NULL)
+        {
+            old=p;
+            p=p->next;
+        }
+
+        old->next=NULL;
+        free(p);
+}
+
+void sum_of_element(struct Node *n)
+{
+    int sum=0;
+        while(n!=NULL)
+        {
+            sum=sum + n->data;
+            n = n->next;
+        }
+        printf("%d",sum);
+}
+
+void display(struct Node *n)
+{
+	while ( n != NULL)
+	{
+		printf ("%d ", n->data);
+		n = n->next;
+	}
+	printf ("\n");
+}
+
+OUTPUT : 
+
+Enter number of nodes: 5
+
+Enter data:  2 4 6 8 10
+1.insert_begin
+2.insert_middle
+3.insert_end
+4.delete_begin
+5.delete_middle
+6.delete_end
+7.sum_of_element
+8.display
+choice: 1
+Element to be insert : 1
+
+choice: 8
+1 2 4 6 8 10 
+
+choice: 7
+ Sum of element : 31
+choice: 5
+Enter the position to be Deleted: 3
+
+choice: 8
+1 2 6 8 10 
+
+choice: 3
+Element to be insert : 20
+
+choice: 8
+1 2 6 8 10 20 
+
+choice: 10
+Program Terminated!!!
